@@ -1,0 +1,24 @@
+--- 
+    - hosts: localhost
+      become: true
+      become_method: enable
+      gather_facts: true
+      
+      tasks:
+      - name: OS distribution
+        shell: cat /etc/redhat-release
+        register: a
+        
+      - name: OS name
+        shell: uname
+        register: b
+   
+      - name: cpu
+        shell: lscpu | head -4| tail -1| awk '{print $2, $5}'
+        register: c
+
+      - name: Print details
+        debug:
+          msg:
+           - "The deisribution is {{a.stdout}} and the OS is {{b.stdout}}"
+           - "Total number of cpu is {{c.stdout}}"

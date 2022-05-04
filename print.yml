@@ -1,0 +1,23 @@
+---
+ - hosts: all
+   become: yes
+   become_method: enable
+   gather_facts: yes
+
+   vars:
+    x: 55
+   tasks:
+   - name: Printing message
+     debug:
+      msg: 
+       -  "WELCOME TO ANSIBLE"
+       -  "The number is {{x}}"
+
+   tasks:
+   - name: kernel version
+     shell: hostname; cat /etc/redhat-release
+     register: y
+     
+   - name: Print kernel
+     debug:
+      msg: "The kernel is {{y.stdout}}"

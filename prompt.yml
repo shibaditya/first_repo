@@ -1,0 +1,14 @@
+---
+- hosts: all
+  vars_prompt: 
+
+       - name: x
+         prompt: How are you?
+         private: no
+
+
+  tasks: 
+
+   - name: Print how are you
+     debug:
+       msg: "You are {{x}}"

@@ -1,0 +1,26 @@
+---
+  - name: test hostname
+
+    hosts: all
+    gather_facts: false
+    become: yes
+    become_method: enable
+ 
+    tasks:
+    - name: getting uptime
+      shell:
+           "hostname"
+      register: var
+      tags: var
+
+    - debug: msg="{{var.stdout}}"
+
+#    tasks:
+ #   - name: check print
+  #    debug:
+   #        msg: "Enter your name"
+    #  register: nm
+     # tags: nm
+#
+ #   - debug: msg="Your name is {{nm.stdout}}"
+
